@@ -1,5 +1,6 @@
 import random
 from django.http import HttpResponse
+from viewer.models import Movie
 
 
 def hello(request):
@@ -21,3 +22,21 @@ def calculator(request):
         return HttpResponse('Error! Only numbers are accepted!')
 
     return HttpResponse(x+y)
+
+
+def movies(requests):
+
+    data_movies = Movie.objects.all()
+
+    movies_response = []
+
+    for movie in data_movies:
+        movies_response.append(
+            {
+                'name': movie.name,
+                'year': movie.year,
+                'genre': movie.genre
+            }
+        )
+
+    return HttpResponse(movies_response)
