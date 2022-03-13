@@ -25,7 +25,6 @@ def calculator(request):
 
 
 def movies(requests):
-
     data_movies = Movie.objects.all()
 
     movies_response = []
