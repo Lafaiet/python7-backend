@@ -1,5 +1,6 @@
 import random
 from django.http import HttpResponse
+from django.shortcuts import render
 from viewer.models import Movie
 
 
@@ -24,18 +25,14 @@ def calculator(request):
     return HttpResponse(x+y)
 
 
-def movies(requests):
+def welcome(request):
+    return render(request, 'welcome.html')
+
+def movies(request):
     data_movies = Movie.objects.all()
 
-    movies_response = []
+    context = {
+        'movies': data_movies
+    }
 
-    for movie in data_movies:
-        movies_response.append(
-            {
-                'name': movie.name,
-                'year': movie.year,
-                'genre': movie.genre
-            }
-        )
-
-    return HttpResponse(movies_response)
+    return render(request, 'movies.html', context=context)

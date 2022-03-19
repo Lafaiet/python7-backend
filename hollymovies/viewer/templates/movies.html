@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>Name</th>
+    <th>Year</th>
+    <th>Genre</th>
+    <th>Duration</th>
+    <th>Language</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+
+    {%  for m in  movies %}
+  <tr>
+    <td>{{ m.name }}</td>
+    <td>{{ m.year }}</td>
+    <td>{{ m.genre }}</td>
+    <td>{{ m.duration }}</td>
+    <td>{{ m.language|default_if_none:"-"}}</td>
+    <td>{{ m.description }}</td>
+  </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
