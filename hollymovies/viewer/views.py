@@ -1,8 +1,9 @@
 import random
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from viewer.models import Movie
+from django.urls import reverse_lazy
 
 
 def hello(request):
@@ -40,3 +41,10 @@ class MovieDetailView(DetailView):
     template_name = 'movie_detail.html'
     model = Movie
     context_object_name = 'movie'
+
+
+class CreateMovieView(CreateView):
+    template_name = 'create_movie.html'
+    model = Movie
+    fields = '__all__'
+    success_url = reverse_lazy('movies')

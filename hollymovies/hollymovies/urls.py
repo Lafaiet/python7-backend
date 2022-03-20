@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from viewer.views import hello, calculator, MoviesListView, WelcomeView,MovieDetailView
+from viewer.views import (
+    hello, calculator, MoviesListView,
+    WelcomeView, MovieDetailView,
+    CreateMovieView
+)
 
 
 urlpatterns = [
@@ -24,5 +28,6 @@ urlpatterns = [
     path('hello', hello),
     path('calculator', calculator),
     path('movies', MoviesListView.as_view(), name='movies'),
-    path('movies/<int:pk>', MovieDetailView.as_view(), name='movie_detail')
+    path('movies/<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
+    path('movies/create', CreateMovieView.as_view(), name='create_movie')
 ]
