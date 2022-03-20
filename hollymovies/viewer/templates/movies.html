@@ -10,7 +10,8 @@
     <th>Genre</th>
     <th>Duration</th>
     <th>Language</th>
-    <th>Description</th>
+    <th>Director</th>
+    <th>Stars</th>
   </tr>
   </thead>
 
@@ -21,7 +22,13 @@
     <td>{{ m.genre }}</td>
     <td>{{ m.duration }}</td>
     <td>{{ m.language|default_if_none:"-"}}</td>
-    <td>{{ m.description }}</td>
+    <td>{{ m.director.name}} ({{m.director.origin|default_if_none:"-"}})</td>
+    <td>
+      {% for s in  m.stars.all %}
+          {{ s }},
+      {% endfor %}
+    </td>
+
   </tr>
     {% endfor %}
 

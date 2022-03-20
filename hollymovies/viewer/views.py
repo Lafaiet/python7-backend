@@ -1,6 +1,7 @@
 import random
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView, ListView, DetailView
 from viewer.models import Movie
 
 
@@ -25,14 +26,17 @@ def calculator(request):
     return HttpResponse(x+y)
 
 
-def welcome(request):
-    return render(request, 'welcome.html')
+class WelcomeView(TemplateView):
+    template_name = 'welcome.html'
 
-def movies(request):
-    data_movies = Movie.objects.all()
 
-    context = {
-        'movies': data_movies
-    }
+class MoviesListView(ListView):
+    template_name = 'movies.html'
+    model = Movie
+    context_object_name = 'movies'
 
-    return render(request, 'movies.html', context=context)
+
+class MovieDetailView(DetailView):
+    template_name = 'movie_detail.html'
+    model = Movie
+    context_object_name = 'movie'
