@@ -18,7 +18,8 @@ from django.urls import path
 from viewer.views import (
     hello, calculator, MoviesListView,
     WelcomeView, MovieDetailView,
-    CreateMovieView
+    CreateMovieView, UpdateMovie,
+    DeleteMovie
 )
 
 
@@ -29,5 +30,7 @@ urlpatterns = [
     path('calculator', calculator),
     path('movies', MoviesListView.as_view(), name='movies'),
     path('movies/<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
-    path('movies/create', CreateMovieView.as_view(), name='create_movie')
+    path('movies/create', CreateMovieView.as_view(), name='create_movie'),
+    path('movies/<int:pk>/update', UpdateMovie.as_view(), name='update_movie'),
+    path('movies/<int:pk>/delete', DeleteMovie.as_view(), name='delete_movie'),
 ]

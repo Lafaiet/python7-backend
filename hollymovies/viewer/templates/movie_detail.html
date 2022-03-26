@@ -16,4 +16,10 @@
 
 <p>{{movie.language}}</p>
 
+<hr>
+
+<p><a href="{% url 'update_movie' movie.id %}">Update Movie</a></p>
+<p><a href="{% url 'delete_movie' movie.id %}">Delete Movie</a></p>
+
+
 {% endblock %}
