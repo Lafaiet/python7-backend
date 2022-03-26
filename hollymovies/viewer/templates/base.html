@@ -29,6 +29,15 @@
           </div>
         </div>
       </div>
+
+      <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+         {% else %}
+              <li><a href="{% url 'login' %}">Login</a></li>
+         {% endif %}
+      </ul>
+
     </nav>
     <div class="container">
       <div class="jumbotron">
