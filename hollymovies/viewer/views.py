@@ -2,6 +2,7 @@ import random
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from viewer.models import Movie
 from django.urls import reverse_lazy
 
@@ -31,7 +32,7 @@ class WelcomeView(TemplateView):
     template_name = 'welcome.html'
 
 
-class MoviesListView(ListView):
+class MoviesListView(LoginRequiredMixin, ListView):
     template_name = 'movies.html'
     model = Movie
     context_object_name = 'movies'
