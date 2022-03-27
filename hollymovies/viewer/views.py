@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from viewer.models import Movie
 from viewer.forms import ContactForm
 from django.urls import reverse_lazy
+from django.core.mail import send_mail
 
 
 def hello(request):
@@ -80,5 +81,13 @@ class ContactView(FormView):
         result = super().form_valid(form)
         cleaned_data = form.cleaned_data
         print(cleaned_data)
+
+        send_mail(
+            f'Contact email from {cleaned_data["name"]}',
+            cleaned_data['message'] + f' User email: {cleaned_data["email"]}',
+            'contact@hollymovies.com',
+            ['lafaietsilva@gmail.com'],
+            fail_silently=False,
+        )
 
         return render(self.request, 'contact_sucess.html')
