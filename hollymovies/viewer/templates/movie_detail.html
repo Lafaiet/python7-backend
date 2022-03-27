@@ -18,8 +18,14 @@
 
 <hr>
 
-<p><a href="{% url 'update_movie' movie.id %}">Update Movie</a></p>
-<p><a href="{% url 'delete_movie' movie.id %}">Delete Movie</a></p>
+{% if perms.viewer.change_movie %}
+    <p><a href="{% url 'update_movie' movie.id %}">Update Movie</a></p>
+{% endif %}
+
+{% if perms.viewer.delete_movie %}
+    <p><a href="{% url 'delete_movie' movie.id %}">Delete Movie</a></p>
+{% endif %}
+
 
 
 {% endblock %}

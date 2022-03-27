@@ -1,9 +1,10 @@
 import random
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from viewer.models import Movie
+from viewer.forms import ContactForm
 from django.urls import reverse_lazy
 
 
@@ -69,3 +70,15 @@ class DeleteMovie(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('movies')
     permission_required = 'viewer.delete_movie'
 
+
+class ContactView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('movies')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        print(cleaned_data)
+
+        return render(self.request, 'contact_sucess.html')

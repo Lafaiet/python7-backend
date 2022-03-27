@@ -20,7 +20,7 @@ from viewer.views import (
     hello, calculator, MoviesListView,
     WelcomeView, MovieDetailView,
     CreateMovieView, UpdateMovie,
-    DeleteMovie
+    DeleteMovie, ContactView
 )
 
 
@@ -35,4 +35,5 @@ urlpatterns = [
     path('movies/<int:pk>/update', UpdateMovie.as_view(), name='update_movie'),
     path('movies/<int:pk>/delete', DeleteMovie.as_view(), name='delete_movie'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('contact', ContactView.as_view(), name='contact')
 ]
