@@ -8,36 +8,26 @@
 
 <hr>
 
-<table class="table">
-  <thead class="thead-dark">
-  <tr>
-    <th>Name</th>
-    <th>Year</th>
-    <th>Genre</th>
-    <th>Duration</th>
-    <th>Language</th>
-    <th>Director</th>
-    <th>Stars</th>
-  </tr>
-  </thead>
 
-    {%  for m in  movies %}
-  <tr>
-    <td><a href="{% url 'movie_detail' m.id %}"> {{ m.name }} </a></td>
-    <td>{{ m.year }}</td>
-    <td>{{ m.genre }}</td>
-    <td>{{ m.duration }}</td>
-    <td>{{ m.language|default_if_none:"-"}}</td>
-    <td>{{ m.director.name}} ({{m.director.origin|default_if_none:"-"}})</td>
-    <td>
-      {% for s in  m.stars.all %}
-          {{ s }},
-      {% endfor %}
-    </td>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
-  </tr>
-    {% endfor %}
+{% for movie in movies %}
 
-</table>
+<div class="col mb-4">
+
+<div class="card" style="width: 18rem;">
+  <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
 
 {% endblock %}
