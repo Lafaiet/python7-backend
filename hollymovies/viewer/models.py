@@ -38,6 +38,7 @@ class Movie(models.Model):
     director = models.ForeignKey(Director, on_delete=models.DO_NOTHING, null=True, blank=True)
     stars = models.ManyToManyField(Star, blank=True)
     language = models.CharField(max_length=20, null=True, blank=True, choices=LANGUAGE_OPTIONS)
+    cover = models.ImageField(null=True, blank=True, upload_to='images/')
 
     # imdb url
     # language
