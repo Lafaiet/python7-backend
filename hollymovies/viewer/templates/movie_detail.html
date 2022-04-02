@@ -2,6 +2,13 @@
 
 {% block content %}
 
+{% if movie.cover %}
+    <p> <img src="{{movie.cover.url}}" width="300" height="auto"> </p>
+{% else %}
+    <p> <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE" width="300" height="auto"> </p>
+{% endif %}
+
+
 <p><b>Name:</b> {{movie.name}}</p>
 <p><b>Year:</b> {{movie.year}}</p>
 <p>{{movie.genre}}</p>
