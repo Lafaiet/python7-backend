@@ -13,18 +13,22 @@
 
 {% for movie in movies %}
 
-<div class="col mb-4">
+  <div class="col mb-4">
 
-<div class="card" style="width: 18rem;">
-  <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="card" style="width: 300;">
+
+      {% if movie.cover %}
+        <img src="{{movie.cover.url}}" width="300" height="auto">
+      {% else %}
+        <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE" width="300" height="auto">
+      {% endif %}
+
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'movie_detail' movie.id%}"> {{movie.name}} </a></h5>
+      </div>
+    </div>
+
   </div>
-</div>
-
-</div>
 
 {% endfor %}
 
