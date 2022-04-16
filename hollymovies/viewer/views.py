@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from viewer.models import Movie
-from viewer.forms import ContactForm
+from viewer.forms import ContactForm, RegisterUserForm
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 
@@ -91,3 +91,9 @@ class ContactView(FormView):
         )
 
         return render(self.request, 'contact_sucess.html')
+
+
+class RegisterUser(CreateView):
+    template_name = 'register_user.html'
+    success_url = reverse_lazy('movies')
+    form_class = RegisterUserForm

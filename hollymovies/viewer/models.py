@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 LANGUAGE_OPTIONS = [
@@ -51,6 +52,26 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    country = models.CharField(max_length=20, null=True, blank=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
+    alergic = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+
+class Rate(models.Model):
+    num_starts = models.PositiveIntegerField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    review = models.TextField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.movie.name + ' - ' + self.profile.user.username
 
 
 # name  year genre  duration       description
