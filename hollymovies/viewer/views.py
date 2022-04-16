@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from viewer.models import Movie
-from viewer.forms import ContactForm, RegisterUserForm
+from viewer.models import Movie, Profile
+from viewer.forms import ContactForm, RegisterUserForm, RateMovieForm
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 
@@ -97,3 +97,22 @@ class RegisterUser(CreateView):
     template_name = 'register_user.html'
     success_url = reverse_lazy('movies')
     form_class = RegisterUserForm
+
+
+class RateMovie(LoginRequiredMixin, FormView):
+    template_name = 'rate_movie.html'
+    success_url = reverse_lazy('movies')
+    form_class = RateMovieForm
+
+    def get_initial(self):
+        initial = super(RateMovie, self).get_initial()
+        movie = Movie.objects.get(id=self.kwargs['pk'])
+        profile = Profile.objects.get(user= self.request.user)
+
+        initial.update({'movie': movie.pk, 'profile': profile})
+        return initial
+
+    def form_valid(self, form):
+        form.save()
+        return super(RateMovie, self).form_valid(form)
+

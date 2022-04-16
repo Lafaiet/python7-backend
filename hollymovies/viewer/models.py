@@ -55,7 +55,7 @@ class Movie(models.Model):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
     country = models.CharField(max_length=20, null=True, blank=True)
     age = models.PositiveIntegerField(null=True, blank=True)
     alergic = models.BooleanField(default=False)
@@ -64,8 +64,17 @@ class Profile(models.Model):
         return self.user.username
 
 
+STARS_OPTIONS = [
+    (0, 0),
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+]
 class Rate(models.Model):
-    num_starts = models.PositiveIntegerField()
+
+    num_starts = models.PositiveIntegerField(choices=STARS_OPTIONS)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     review = models.TextField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

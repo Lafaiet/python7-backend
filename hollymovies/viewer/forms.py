@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Rate
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=50)
@@ -16,5 +16,15 @@ class RegisterUserForm(UserCreationForm):
         new_profile = Profile.objects.create(user=new_user)
         return new_user
 
+
+class RateMovieForm(forms.ModelForm):
+
+    class Meta:
+        model = Rate
+        fields = '__all__'
+        widgets = {
+            'profile': forms.HiddenInput(),
+            'movie': forms.HiddenInput()
+        }
 
 
