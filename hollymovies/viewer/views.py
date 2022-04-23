@@ -116,3 +116,16 @@ class RateMovie(LoginRequiredMixin, FormView):
         form.save()
         return super(RateMovie, self).form_valid(form)
 
+
+class FavoriteMoviesListView(ListView):
+    template_name = 'favorite_movies.html'
+    model = Movie
+    context_object_name = 'movies'
+
+    def get_queryset(self):
+        profile = Profile.objects.get(user=self.request.user)
+        movies = profile.favorite_movies.all()
+
+        return movies
+
+

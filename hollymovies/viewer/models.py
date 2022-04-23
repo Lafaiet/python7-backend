@@ -59,6 +59,7 @@ class Profile(models.Model):
     country = models.CharField(max_length=20, null=True, blank=True)
     age = models.PositiveIntegerField(null=True, blank=True)
     alergic = models.BooleanField(default=False)
+    favorite_movies = models.ManyToManyField(Movie)
 
     def __str__(self):
         return self.user.username
@@ -81,8 +82,3 @@ class Rate(models.Model):
 
     def __str__(self):
         return self.movie.name + ' - ' + self.profile.user.username
-
-
-# name  year genre  duration       description
-# Batman 2020 action  ?????        [asadad sasasas asa sasa saasa  ssa sa sas as asasasasasas sasas adad dad adfaf afafaf afagf ]
-# Spider man 2022 action 1h 20mins null

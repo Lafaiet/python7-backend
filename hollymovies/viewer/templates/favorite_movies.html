@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+
+{% for movie in movies %}
+
+  <div class="col mb-4">
+
+    <div class="card" style="width: 300;">
+
+      {% if movie.cover %}
+        <img src="{{movie.cover.url}}" width="300" height="450">
+      {% else %}
+        <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE" width="300" height="450">
+      {% endif %}
+
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-star-fill"></i> 8.5 </h6>
+        <h5 class="card-title"><a href="{% url 'movie_detail' movie.id%}"> {{movie.name}} </a></h5>
+        <a href="https://www.imdb.com/video/vi2053636121?playlistId=tt0120630&ref_=tt_pr_ov_vi" class="btn btn-primary"><i class="bi bi-film"></i> Trailer</a>
+      </div>
+    </div>
+
+  </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

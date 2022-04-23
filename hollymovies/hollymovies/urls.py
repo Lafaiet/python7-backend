@@ -24,7 +24,8 @@ from viewer.views import (
     WelcomeView, MovieDetailView,
     CreateMovieView, UpdateMovie,
     DeleteMovie, ContactView,
-    RegisterUser, RateMovie
+    RegisterUser, RateMovie,
+    FavoriteMoviesListView
 )
 
 
@@ -34,6 +35,7 @@ urlpatterns = [
     path('hello', hello),
     path('calculator', calculator),
     path('movies', MoviesListView.as_view(), name='movies'),
+    path('movies/favorites', FavoriteMoviesListView.as_view(), name='favorite_movies'),
     path('movies/<int:pk>', MovieDetailView.as_view(), name='movie_detail'),
     path('movies/create', CreateMovieView.as_view(), name='create_movie'),
     path('movies/<int:pk>/update', UpdateMovie.as_view(), name='update_movie'),
