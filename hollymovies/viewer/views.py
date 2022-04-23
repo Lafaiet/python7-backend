@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from viewer.models import Movie, Profile
+from viewer.models import Movie, Profile, Rate
 from viewer.forms import ContactForm, RegisterUserForm, RateMovieForm
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
@@ -127,5 +127,16 @@ class FavoriteMoviesListView(ListView):
         movies = profile.favorite_movies.all()
 
         return movies
+
+class UserRatesListView(ListView):
+    template_name = 'user_rates.html'
+    model = Rate
+    context_object_name = 'rates'
+
+    def get_queryset(self):
+        profile = Profile.objects.get(user=self.request.user)
+        rates = Rate.favorite_movies.all()
+
+        return rates
 
 
